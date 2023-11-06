@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animation</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: rgba(95, 90, 90, 0.753);
+        }
+    </style>
+    <canvas width='500' height="300" id="cnv"></canvas>
+    <script>
+        var canvas = window.document.getElementById('cnv')
+        var ctx = canvas.getContext('2d')
+        
+
+        var bola = {
+            x:canvas.width/2,
+            y:canvas.height/2,
+            raio:30,
+            cor:'rgba(117, 39, 39, 0.562)'
+        }
+        c = 0
+        
+        var velx = 15
+        var vely = 20
+        
+        requestAnimationFrame(loop)
+        function loop() {
+            requestAnimationFrame(loop)
+            console.log(c)
+            if (c < 6){
+                c++
+                return
+            } 
+            c = 0
+            ctx.clearRect(0,0, canvas.width, canvas.height)
+           
+            ctx.fillStyle = 'black'
+            ctx.fillRect(0,0, canvas.width, canvas.height)
+            
+            
+            if ((bola.x-bola.raio) <= 0) {
+                velx = 15
+                //console.log(velx)
+            }
+            else if ((bola.x+bola.raio) >= canvas.width) {
+                velx = -15
+                //console.log(velx)
+            }else if ((bola.y-bola.raio) <= 0){
+                vely = 20
+                //console.log(vely)
+            }else if((bola.y+bola.raio) >= canvas.height) {
+                vely = -20
+                //console.log(vely)
+            }
+                bola.x += velx
+                bola.y += vely
+            
+            
+            //desenho bola
+            ctx.beginPath()
+            ctx.arc(bola.x, bola.y, bola.raio, 0, 2*Math.PI)
+            ctx.fillStyle = bola.cor
+            ctx.fill()
+
+            
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
